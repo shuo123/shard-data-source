@@ -1,0 +1,21 @@
+spring:
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  datasource:
+    type: com.example.sharddatasource.datasource.MultipleDataSource
+multi:
+  jdbc:
+    datasource:
+      master:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT
+        username: root
+        password: root
+      slaveNames: slave1
+      salves:
+        slave1:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://localhost:3306/test-1?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT
+          username: root
+          password: root
