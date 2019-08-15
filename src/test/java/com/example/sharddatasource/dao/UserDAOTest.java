@@ -29,4 +29,12 @@ public class UserDAOTest {
         System.out.println(user.get());
     }
 
+    @Test
+    public void getMultiSlave(){
+        for(int i = 0; i< 10; i++) {
+            Optional<User> user = userDAO.findById(1L);
+            System.out.println(user.get());
+        }
+    }
+
 }
