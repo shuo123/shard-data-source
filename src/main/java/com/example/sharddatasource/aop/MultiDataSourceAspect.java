@@ -1,6 +1,6 @@
 package com.example.sharddatasource.aop;
 
-import com.example.sharddatasource.datasource.MultipleDataSourceHolder;
+import com.example.sharddatasource.datasource.MultiDataSourceHolder;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Aspect;
@@ -18,17 +18,17 @@ import org.springframework.stereotype.Component;
 public class MultiDataSourceAspect {
 
     @Pointcut("execution(* com.example.sharddatasource.dao..*.*(..))")
-    public void pointcut(){};
+    public void pointcut(){}
 
     @Before("pointcut()")
     public void before(JoinPoint joinPoint){
         Signature signature = joinPoint.getSignature();
         String name = signature.getName();
         if(name.startsWith("save")){
-            MultipleDataSourceHolder.setDataSourceKey(MultipleDataSourceHolder.MASTER);
+            MultiDataSourceHolder.setDataSourceKey(MultiDataSourceHolder.MASTER);
         }
         if(name.startsWith("find")){
-            MultipleDataSourceHolder.setDataSourceKey(MultipleDataSourceHolder.SLAVE);
+            MultiDataSourceHolder.setDataSourceKey(MultiDataSourceHolder.SLAVE);
         }
     }
 

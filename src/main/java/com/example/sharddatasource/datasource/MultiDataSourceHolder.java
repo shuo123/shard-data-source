@@ -5,23 +5,23 @@ package com.example.sharddatasource.datasource;
  * @version 1.0.0
  * @date 2019-08-14 14:32
  **/
-public class MultipleDataSourceHolder {
+public class MultiDataSourceHolder {
 
-    private static final ThreadLocal<String> dataSourceKey = new ThreadLocal<>();
+    private static final ThreadLocal<String> DATA_SOURCE_KEY = new ThreadLocal<>();
 
     public static final String MASTER = "masterDataSource";
 
     public static final String SLAVE = "slaveDataSource";
 
-    private MultipleDataSourceHolder() {
+    private MultiDataSourceHolder() {
     }
 
     public static void setDataSourceKey(String key){
-        dataSourceKey.set(key);
+        DATA_SOURCE_KEY.set(key);
     }
 
-    public static String getDataSourceKey(){
-        String key = dataSourceKey.get();
+    static String getDataSourceKey(){
+        String key = DATA_SOURCE_KEY.get();
         if(key == null){
             return MASTER;
         }
@@ -29,6 +29,6 @@ public class MultipleDataSourceHolder {
     }
 
     public static void clear(){
-        dataSourceKey.remove();
+        DATA_SOURCE_KEY.remove();
     }
 }
